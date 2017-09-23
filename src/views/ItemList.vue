@@ -1,14 +1,14 @@
 <template>
-  <item-list />
+  <item />
 </template>
 
 <script>
-import ItemList from './views/ItemList'
+import Item from '../components/Item'
 
 export default {
   name: 'app',
   components: {
-    ItemList
+    Item
   }
 }
 </script>
