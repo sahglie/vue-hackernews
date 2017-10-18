@@ -7,9 +7,7 @@
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
     "build": "node build/build.js",
-    "lint": "eslint --ext .js,.vue src",
-    "lint:fix": "npm run lint -- --fix",
-    "unit": "jest --config .jestrc.json"
+    "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
