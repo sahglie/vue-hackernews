@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import ItemList from './views/ItemList'
+import ItemList from './views/ItemList.vue'
 
 export default {
   name: 'app',
