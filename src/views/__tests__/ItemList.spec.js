@@ -34,7 +34,7 @@ describe('ItemList.vue', () => {
     })
   })
 
-  test('calls $bar start on load', () => {
+  test('calls $bar start when rendered', () => {
     const $bar = {
       start: jest.fn(),
       finish: () => {}
