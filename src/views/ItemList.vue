@@ -12,7 +12,7 @@
 
 <script>
 import Item from '../components/Item.vue'
-import { fetchListData } from '../api/api'
+import { mapActions } from 'vuex'
 
 export default {
   components: {
@@ -23,23 +23,27 @@ export default {
     this.loadItems()
   },
 
-  data () {
-    return {
-      displayItems: []
+  computed: {
+    displayItems () {
+      return this.$store.getters.displayItems
     }
   },
 
   methods: {
+    ...mapActions(['fetchListData']), // #A
     loadItems () {
       this.$bar.start()
-      fetchListData('top')
-      .then(items => {
-        this.displayItems = items
+      this.fetchListData({ // #B
+        type: 'top'
+      }).then(() => {
         this.$bar.finish()
       })
-      .catch(() => this.$bar.fail())
+      .catch(() => {
+        this.$bar.fail()
+      })
     }
   }
+
 }
 </script>
 
