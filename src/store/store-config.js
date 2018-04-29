@@ -2,11 +2,14 @@ import actions from './actions'
 import mutations from './mutations'
 import getters from './getters'
 
-const state = { // #A
-  items: []
+const state = {
+  item: null,
+  items: [],
+  comments: {},
+  user: null
 }
 
-export default { // #B
+export default {
   state,
   getters,
   actions,
