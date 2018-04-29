@@ -226,4 +226,9 @@ describe('ItemList.vue', () => {
     expect(wrapper.findAll('a').at(1).attributes().href).toBe(undefined)
     expect(wrapper.findAll('a').at(1).text()).toBe('more >')
   })
+
+  test('Sets document.title with the capitalized type prop', () => {
+    createWrapper()
+    expect(document.title).toBe('Vue HN | Top')
+  })
 })

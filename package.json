@@ -80,7 +80,8 @@
   "jest": {
     "transform": {
       "^.+\\.js$": "babel-jest",
-      ".*\\.(vue)$": "vue-jest"
-    }
-  }
+      ".+\\.(vue)$": "vue-jest"
+    },
+    "setupFiles": ["./test-setup.js"]
+  }  
 }
