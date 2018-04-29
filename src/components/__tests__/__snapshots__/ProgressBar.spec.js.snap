@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProgressBar.vue renders in a success state when finish is called 1`] = `<div class="progress" style="width: 100%;"></div>`;
+
+exports[`ProgressBar.vue renders in an error state when fail  is called 1`] = `<div class="progress show error" style="width: 100%;"></div>`;
+
+exports[`ProgressBar.vue renders in an in progress state when start is called 1`] = `<div class="progress show" style="width: 10%;"></div>`;

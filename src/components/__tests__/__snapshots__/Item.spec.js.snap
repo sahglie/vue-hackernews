@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Item.vue renders correctly 1`] = `
+<li class="news-item"><span class="score">10</span> <span class="title"><a href="https://vue-test-utils.vuejs.org/" target="_blank" rel="noopener">vue-test-utils is released</a> <span class="host"> (vue-test-utils.vuejs.org)</span></span>
+  <br> <span class="meta"><span class="by">
+        by <router-link to="/user/eddyerburgh">eddyerburgh</router-link></span> <span class="comments-link">
+        | <router-link to="/item/11122233"> comments</router-link></span> <span>
+  			10 minutes ago
+			</span></span>
+</li>
+`;
+
+exports[`Item.vue renders correctly when item has no url and is of type top 1`] = `
+<li class="news-item"><span class="score">10</span> <span class="title"><a target="_blank" rel="noopener">vue-test-utils is released</a> <span class="host"> ()</span></span>
+  <br> <span class="meta"><span class="by">
+        by <router-link to="/user/eddyerburgh">eddyerburgh</router-link></span> <span class="comments-link">
+        | <router-link to="/item/11122233"> comments</router-link></span> <span>
+  			10 minutes ago
+			</span></span>
+</li>
+`;

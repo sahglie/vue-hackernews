@@ -72,4 +72,50 @@ describe('Item.vue', () => {
     })
     expect(wrapper.text()).toContain('(some-url.com)')
   })
+
+  test('renders correctly', () => {
+    const dateNow = jest.spyOn(Date, 'now')
+    const dateNowTime = new Date('2018')
+
+    dateNow.mockImplementation(() => dateNowTime) // #A
+
+    const item = { // #B
+      by: 'eddyerburgh',
+      id: 11122233,
+      score: 10,
+      time: (dateNowTime / 1000) - 600,
+      title: 'vue-test-utils is released',
+      type: 'story',
+      url: 'https://vue-test-utils.vuejs.org/'
+    }
+    const wrapper = shallow(Item, { // #C
+      propsData: {
+        item
+      }
+    })
+    dateNow.mockRestore()
+    expect(wrapper.html()).toMatchSnapshot() // #D
+  })
+  test('renders correctly when item has no url and is of type top', () => {
+    const dateNow = jest.spyOn(Date, 'now')
+    const dateNowTime = new Date('2018')
+
+    dateNow.mockImplementation(() => dateNowTime)
+
+    const item = { // #A
+      by: 'eddyerburgh',
+      id: 11122233,
+      score: 10,
+      time: (dateNowTime / 1000) - 600,
+      title: 'vue-test-utils is released',
+      type: 'top'
+    }
+    const wrapper = shallow(Item, {
+      propsData: {
+        item
+      }
+    })
+    dateNow.mockRestore()
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

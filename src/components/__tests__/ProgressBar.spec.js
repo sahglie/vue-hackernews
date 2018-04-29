@@ -69,4 +69,30 @@ describe('ProgressBar.vue', () => {
     expect(clearIntervalSpy.mock.calls[0][0]).toBe(timerStub)
     clearIntervalSpy.mockRestore()
   })
+
+  test('renders in an in progress state when start is called', () => {
+    jest.useFakeTimers()
+    const wrapper = shallow(ProgressBar)
+    wrapper.vm.start()
+    jest.runTimersToTime(1000) // #A
+    expect(wrapper.html()).toMatchSnapshot() // #C
+  })
+
+  test('renders in a success state when finish is called', () => {
+    jest.useFakeTimers()
+    const wrapper = shallow(ProgressBar)
+    wrapper.vm.start()
+    jest.runTimersToTime(1000)
+    wrapper.vm.finish()
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  test('renders in an error state when fail  is called', () => {
+    jest.useFakeTimers()
+    const wrapper = shallow(ProgressBar)
+    wrapper.vm.start()
+    jest.runTimersToTime(1000)
+    wrapper.vm.fail()
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
