@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="1"
+            tests="4">
+
+  <testsuite name="journeys"
+    errors="0" failures="1" hostname="" id="" package="journeys" skipped="0"
+    tests="4" time="36.96" timestamp="Sun, 29 Apr 2018 18:02:51 GMT">
+  
+    <testcase name="takes user to the item page" classname="journeys" time="6.306" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="clicking on a user redirects to  the user page" classname="journeys" time="5.155" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="paginates items correctly" classname="journeys" time="16.93" assertions="5">
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="changes list by clicking through nav" classname="journeys" time="8.572" assertions="3">
+
+    
+
+      <failure message="Expected element &lt;.item-list&gt; text to not equal: &#34;105
+A History of APL in 50 Functions (jsoftware.com)
+by jim-jim-jim | 17 comments 4 hours ago
+17
+New Shepard&#39;s 8th test flight [video] (blueorigin.com)
+by thibran | 6 comments 1 hour ago
+66
+The aging mind: neuroplasticity in response to cognitive training (nlm.nih.gov)
+by qrian | 43 comments 4 hours ago
+178
+Competitive Programmer&#39;s Handbook (2017) [pdf] (cses.fi)
+by linouk23 | 20 comments 3 hours ago
+10
+An API Journey: From Idea to Deployment the Agile Way (developers.redhat.com)
+by rterzi | 0 comments 1 hour ago
+21
+Core Memory Upgrade for Arduino (hackaday.com)
+by ingve | 2 comments 3 hours ago
+149
+France seizes france.com from man who&#39;s had it since 1994 (arstechnica.com)
+by coobird | 78 comments 3 hours ago
+73
+Show HN: Web Audio DSP Playground (acarabott.github.io)
+by acarabott | 32 comments 7 hours ago
+126
+Tell HN: Sci-Hub&#39;s TLS certificate has started failing ()
+by AlbertoGP | 66 comments 5 hours ago
+15
+Building a Content-Based Search Engine IV: Earth Mover&#39;s Distance (deepideas.net)
+by deepideas | 2 comments 2 hours ago
+5
+Optimizing Paxos with batching and pipelining [pdf] (pdfs.semanticscholar.org)
+by baotiao | 0 comments 2 hours ago
+1
+The Muse is hiring full-stack and back-end engineers (themuse.com)
+53 minutes ago
+35
+The Impoliteness of Overriding Methods (2012) (journal.stuffwithstuff.com)
+by tosh | 19 comments 7 hours ago
+65
+The NSA is not made of magic (2014) (schneier.com)
+by CapacitorSet | 22 comments 4 hours ago
+18
+T-Mobile seals merger deal with Sprint (cnbc.com)
+by robbiet480 | 9 comments 2 hours ago
+101
+Joseph Stiglitz Says American Inequality Didn’t Just Happen (evonomics.com)
+by rbanffy | 74 comments 5 hours ago
+14
+Show HN: A little eye-candy for the terminal (in Go) (github.com)
+by arsham | 2 comments 7 hours ago
+281
+The NetHack dev team is happy to announce the release of NetHack 3.6.1 (groups.google.com)
+by hapnin | 104 comments 17 hours ago
+31
+Ruby on WebAssembly (blacktm.com)
+by geospeck | 12 comments 10 hours ago
+151
+What happened, Gmail? (uxplanet.org)
+by xoxoavi | 169 comments 9 hours ago&#34;">    at F.browser.url.waitForElementVisible.getText.click.waitForElementNotVisible.perform (/Users/yerbue01/workspace/vue-hackernews/e2e/specs/journeys.js:56:26)</failure>
+
+    
+    </testcase>
+  
+
+  
+
+  
+  </testsuite>
+</testsuites>
