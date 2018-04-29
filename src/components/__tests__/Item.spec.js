@@ -1,4 +1,4 @@
-import { shallow } from '@vue/test-utils'
+import { shallow, RouterLinkStub } from '@vue/test-utils'
 import Item from '../Item.vue'
 
 describe('Item.vue', () => {
@@ -7,7 +7,10 @@ describe('Item.vue', () => {
       score: 10
     }
     const wrapper = shallow(Item, {
-      propsData: { item }
+      propsData: { item },
+      stubs: {
+        RouterLink: RouterLinkStub
+      }
     })
     expect(wrapper.text()).toContain(item.score)
   })
@@ -17,7 +20,10 @@ describe('Item.vue', () => {
       by: 'some author'
     }
     const wrapper = shallow(Item, {
-      propsData: { item }
+      propsData: { item },
+      stubs: {
+        RouterLink: RouterLinkStub
+      }
     })
     expect(wrapper.text()).toContain(item.by)
   })
@@ -27,7 +33,10 @@ describe('Item.vue', () => {
       title: 'some title'
     }
     const wrapper = shallow(Item, {
-      propsData: { item }
+      propsData: { item },
+      stubs: {
+        RouterLink: RouterLinkStub
+      }
     })
     expect(wrapper.find('a').text()).toBe(item.title)
   })
@@ -37,7 +46,10 @@ describe('Item.vue', () => {
       url: 'http://some-url.com'
     }
     const wrapper = shallow(Item, {
-      propsData: { item }
+      propsData: { item },
+      stubs: {
+        RouterLink: RouterLinkStub
+      }
     })
     const aWrapper = wrapper.find('a')
     expect(aWrapper.attributes().href).toBe(item.url)
@@ -55,6 +67,9 @@ describe('Item.vue', () => {
     const wrapper = shallow(Item, {
       propsData: {
         item
+      },
+      stubs: {
+        RouterLink: RouterLinkStub
       }
     })
     dateNow.mockRestore()
@@ -68,6 +83,9 @@ describe('Item.vue', () => {
     const wrapper = shallow(Item, {
       propsData: {
         item
+      },
+      stubs: {
+        RouterLink: RouterLinkStub
       }
     })
     expect(wrapper.text()).toContain('(some-url.com)')
@@ -91,6 +109,9 @@ describe('Item.vue', () => {
     const wrapper = shallow(Item, { // #C
       propsData: {
         item
+      },
+      stubs: {
+        RouterLink: RouterLinkStub
       }
     })
     dateNow.mockRestore()
@@ -113,6 +134,9 @@ describe('Item.vue', () => {
     const wrapper = shallow(Item, {
       propsData: {
         item
+      },
+      stubs: {
+        RouterLink: RouterLinkStub
       }
     })
     dateNow.mockRestore()

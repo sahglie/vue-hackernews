@@ -1,8 +1,10 @@
 import Vue from 'vue'
-import App from './App.vue'
-import { createStore } from './store'
-import { createRouter } from './router'
+import Vuex from 'vuex'
+import Router from 'vue-router'
 import { sync } from 'vuex-router-sync'
+import App from './App.vue'
+import storeConfig from './store/store-config'
+import routerConfig from './router/router-config'
 import {
   titleMixin
 } from './util/mixins'
@@ -11,7 +13,6 @@ import {
   host
 } from './util/filters'
 
-// mixin for handling title
 // mixin for handling title
 Vue.mixin(titleMixin)
 
@@ -23,8 +24,11 @@ Vue.filter('host', host)
 // app instances on each call (which is called for each SSR request)
 export function createApp () {
   // create store and router instances
-  const store = createStore()
-  const router = createRouter()
+  Vue.use(Vuex)
+  Vue.use(Router) // #B
+
+  const router = new Router(routerConfig)
+  const store = new Vuex.Store(storeConfig)
 
   // sync the router with the vuex store.
   // this registers `store.state.route`
