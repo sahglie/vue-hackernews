@@ -11,7 +11,7 @@
     "build:server": "cross-env NODE_ENV=production webpack --config build/webpack.server.conf.js --progress --hide-modules",
     "lint": "eslint --ext .js,.vue src",
     "lint:fix": "npm run lint -- --fix",
-    "test": "npm run lint && npm run unit",
+    "test": "npm run lint && npm run unit && npm run integration",
     "unit": "jest src",
     "integration": "npm run build && jest --testEnvironment node ./server.spec.js --forceExit"
   },
