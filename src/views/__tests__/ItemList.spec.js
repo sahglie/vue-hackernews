@@ -1,7 +1,7 @@
 jest.mock('../../api/api.js')
 jest.useRealTimers()
 
-import { shallow, createLocalVue } from '@vue/test-utils'
+import { shallow, createLocalVue, RouterLinkStub } from '@vue/test-utils'
 import Vuex from 'vuex'
 import flushPromises from 'flush-promises'
 import ItemList from '../ItemList.vue'
@@ -15,7 +15,7 @@ describe('ItemList.vue', () => {
   function createStore (overrides) {
     const defaultStoreConfig = {
       state: {
-        items: []
+        items: [{}, {}, {}]
       },
       getters: {
         displayItems: jest.fn()
@@ -35,9 +35,21 @@ describe('ItemList.vue', () => {
         $bar: {
           start: jest.fn(),
           finish: jest.fn()
+        },
+        $route: {
+          params: {}
+        },
+        $router: {
+          replace: jest.fn()
         }
       },
       localVue,
+      propsData: {
+        type: 'top'
+      },
+      stubs: {
+        RouterLink: RouterLinkStub
+      },
       store: createStore()
     }
     return shallow(ItemList, merge(defaultMountingOptions, overrides))
@@ -51,7 +63,6 @@ describe('ItemList.vue', () => {
       }
     })
     const wrapper = createWrapper({ store })
-    console.log(store.getters.displayItems)
     expect(wrapper.findAll(Item)).toHaveLength(items.length)
   })
 
@@ -105,16 +116,20 @@ describe('ItemList.vue', () => {
     expect(mocks.$bar.fail).toHaveBeenCalled()
   })
 
-  test('dispatches fetchListData with top', async () => {
+  test('dispatches fetchListData with type prop', async () => {
     const store = createStore()
     store.dispatch = jest.fn(() => Promise.resolve())
-    createWrapper({ store })
+    const type = 'a type'
+    const propsData = {
+      type
+    }
+    createWrapper({ store, propsData })
     await flushPromises()
-    expect(store.dispatch).toHaveBeenCalledWith('fetchListData', { type: 'top' })
+    expect(store.dispatch).toHaveBeenCalledWith('fetchListData', { type })
   })
 
   test('calls $bar fail when fetchListData throws', async () => {
-    const store = createStore({ // #A
+    const store = createStore({
       actions: { fetchListData: jest.fn(() => Promise.reject()) }
     })
     const mocks = {
@@ -125,5 +140,90 @@ describe('ItemList.vue', () => {
     createWrapper({ mocks, store })
     await flushPromises()
     expect(mocks.$bar.fail).toHaveBeenCalled()
+  })
+
+  test('renders 1/5 when on page 1 of 5', () => {
+    const store = createStore({
+      state: {
+        items: new Array(100).fill({})
+      }
+    })
+    const wrapper = createWrapper({store})
+    expect(wrapper.text()).toContain('1/5')
+  })
+
+  test('renders 2/5 when on page 2 of 5', () => {
+    const store = createStore({
+      state: {
+        items: new Array(100).fill({})
+      }
+    })
+    const mocks = {
+      $route: {
+        params: {
+          page: 2
+        }
+      }
+    }
+    const wrapper = createWrapper({ mocks, store })
+    expect(wrapper.text()).toContain('2/5')
+  })
+
+  test('calls $router.replace when the page parameter is less than 0', async () => {
+    const mocks = {
+      $route: {
+        params: {
+          page: -1
+        }
+      },
+      $router: {
+        replace: jest.fn()
+      }
+    }
+    createWrapper({ mocks })
+    await flushPromises()
+    expect(mocks.$router.replace).toHaveBeenCalledWith('/top/1')
+  })
+
+  test('calls $router.replace when the page parameter is greater than the max page number', async () => {
+    const mocks = {
+      $route: {
+        params: {
+          page: 1000
+        }
+      },
+      $router: {
+        replace: jest.fn()
+      }
+    }
+    createWrapper({ mocks })
+    await flushPromises()
+    expect(mocks.$router.replace).toHaveBeenCalledWith('/top/1')
+  })
+
+  test('renders a <router-link> with the next page if one exists', () => {
+    const store = createStore({ state: {
+      items: new Array(40).fill({})
+    }})
+    const wrapper = createWrapper({ store })
+    expect(wrapper.find(RouterLinkStub).props().to).toBe('/top/2')
+    expect(wrapper.find(RouterLinkStub).text()).toBe('more >')
+  })
+
+  test('renders an <a> element without an href if there are no previous pages', () => {
+    const wrapper = createWrapper()
+
+    expect(wrapper.find('a').attributes().href).toBe(undefined)
+    expect(wrapper.find('a').text()).toBe('< prev')
+  })
+
+  test('renders an <a> element without an href if there are no next pages', () => {
+    const store = createStore({ state: {
+      items: []
+    }})
+    const wrapper = createWrapper({ store })
+
+    expect(wrapper.findAll('a').at(1).attributes().href).toBe(undefined)
+    expect(wrapper.findAll('a').at(1).text()).toBe('more >')
   })
 })

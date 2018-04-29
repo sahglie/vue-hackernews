@@ -1,12 +1,18 @@
 <template>
   <div id="app">
-    <header class="header" />
-    <div class="view">
-      <transition name="fade" mode="out-in">
-      <item-list />
-    </transition>
-  </div>
-  </div>
+     <header class="header">
+       <nav class="inner">
+         <router-link to="/top">Top</router-link>
+         <router-link to="/new">New</router-link>
+         <router-link to="/show">Show</router-link>
+         <router-link to="/ask">Ask</router-link>
+         <router-link to="/job">Jobs</router-link>
+       </nav>
+     </header>
+     <div class="view">
+       <router-view :key="$route.fullPath" />
+     </div>
+   </div>
 </template>
 
 <script>

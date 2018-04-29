@@ -1,21 +1,28 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import Router from 'vue-router'
+import { sync } from 'vuex-router-sync'
 import App from './App'
 import ProgressBar from './components/ProgressBar'
 import storeConfig from './store/store-config'
+import routerConfig from './router/router-config'
 
-Vue.use(Vuex) // #A
+Vue.use(Vuex)
+Vue.use(Router)
 
-const store = new Vuex.Store(storeConfig) // #B
+const router = new Router(routerConfig)
+const store = new Vuex.Store(storeConfig)
+
+sync(store, router)
 
 Vue.config.productionTip = false
 
-// global progress bar
 const bar = Vue.prototype.$bar = new Vue(ProgressBar).$mount()
 document.body.appendChild(bar.$el)
 
-new Vue({ // eslint-disable-line no-new
-  el: '#app',
-  store, // #C
-  render: h => h(App)
+new Vue({
+  store,
+  router,
+  render: h => h(App),
+  el: '#app'
 })
